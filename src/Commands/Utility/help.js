@@ -3,9 +3,6 @@ const { EmbedBuilder, SelectMenuBuilder, Client, Message,
     CommandInteraction, ChatInputCommandInteraction, ComponentType } = require('discord.js')
 const { readdirSync } = require('fs')
 require('dotenv').config()
-/*const { Database } = require('quickmongo')
-const mongoDB = process.env.DATABASE
-const qMongo = new Database(mongoDB) */
 const prefix = '&'
 const color = 'Red'
 const { create_mh } = require(`../../functions/menu`)
@@ -26,14 +23,6 @@ module.exports = {
 
 
         try {
-            /*const prefixes = await qMongo.fetch(`prefix-${message.guild.id}`)
-
-            if (prefixes == null) {
-                prefix = '&'
-            } else {
-                prefix = prefixes
-            } */
-
             let categories = []
             let cots = []
 
@@ -66,10 +55,10 @@ module.exports = {
 
                 let ccate = []
 
-                readdirSync('./Commands/').forEach((dir) => {
+                readdirSync('./src/Commands/').forEach((dir) => {
                     if (ignored.includes(dir.toLowerCase())) return
 
-                    const commands = readdirSync(`./Commands/${dir}`).filter((file) => file.endsWith('.js'))
+                    const commands = readdirSync(`./src/Commands/${dir}`).filter((file) => file.endsWith('.js'))
 
                     if (ignored.includes(dir.toLowerCase())) return
 
@@ -111,9 +100,9 @@ module.exports = {
                         let value = values[0]
                         let catts = []
 
-                        readdirSync('./Commands/').forEach((dir) => {
+                        readdirSync('./src/Commands/').forEach((dir) => {
                             if (dir.toLowerCase() !== value.toLowerCase()) return
-                            const commands = readdirSync(`./Commands/${dir}/`).filter((file) =>
+                            const commands = readdirSync(`./src/Commands/${dir}/`).filter((file) =>
                                 file.endsWith('.js'))
 
                             const cmds = commands.map((command) => {
@@ -174,9 +163,9 @@ module.exports = {
             } else {
                 let catts = []
 
-                readdirSync('./Commands/').forEach((dir) => {
+                readdirSync('./src/Commands/').forEach((dir) => {
                     if (dir.toLowerCase() !== args[0].toLowerCase()) return
-                    const commands = readdirSync(`./Commands/${dir}/`).filter((file) => file.endsWith('.js'))
+                    const commands = readdirSync(`./src/Commands/${dir}/`).filter((file) => file.endsWith('.js'))
 
                     const cmds = commands.map((command) => {
                         let file = require(`../../Commands/${dir}/${command}`)
