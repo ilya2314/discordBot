@@ -12,7 +12,7 @@ const UsersDB = require('./Schemas/Users')
 const GuildsDB = require('./Schemas/Guilds')
 const CommandsDB = require('./Schemas/Commands')
 
-require('dotenv').config();
+
 
 const client = new Client({
     intents: 131071,
@@ -22,7 +22,7 @@ const client = new Client({
 });
 
 client.commands = new Collection()
-client.config = require('../config.json');
+client.config = require('dotenv').config();
 client.voiceGenerator = new Collection();
 
 client.Wargamer = require('../src/functions/wargamer')
