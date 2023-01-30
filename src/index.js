@@ -7,6 +7,11 @@ const { loadCommands } = require('./Handlers/commandHandler');
 const { loadEvents } = require("./Handlers/eventHandlers")
 const { errorHandler } = require('./Handlers/errorHandler')
 
+
+const UsersDB = require('./Schemas/Users')
+const GuildsDB = require('./Schemas/Guilds')
+const CommandsDB = require('./Schemas/Commands')
+
 require('dotenv').config();
 
 const client = new Client({
@@ -19,6 +24,15 @@ const client = new Client({
 client.commands = new Collection()
 client.config = require('../config.json');
 client.voiceGenerator = new Collection();
+
+client.Wargamer = require('../src/functions/wargamer')
+client.functions = require("../src/functions/functions.js");
+client.databases = [
+    UsersDB.findOne('user'),
+    GuildsDB.findOne('guild'),
+    CommandsDB.findOne('command'),
+];
+client.realms = require('../src/functions/realms.json');
 
 client.filters = new Collection();
 client.filtersLog = new Collection();
