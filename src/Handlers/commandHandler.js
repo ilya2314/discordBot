@@ -26,7 +26,7 @@ function loadCommands(client) {
     }
 
     client.application.commands.set(commandsArray);
-    const developerGuild = client.guilds.cache.get(client.config.developerGuild);
+    const developerGuild = client.guilds.cache.get(process.env.GUILD_ID);
     developerGuild.commands.set(developerArray);
     return console.log(table.toString(), "\n Load com");
 }
